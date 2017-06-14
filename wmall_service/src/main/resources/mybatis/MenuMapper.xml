@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wmall.mapper.MenuDao">
+    <sql id="BaseColumn">
+        id,name,p_Id as pId,level,del_flag as delFlag,create_time as createTime,icon,url
+    </sql>
+    <select id="getMenus" resultType="com.wmall.bean.Menu">
+        SELECT <include refid="BaseColumn"/> from menu
+        where del_flag = '1'
+        and p_Id = #{pId}
+
+    </select>
+    <select id="countNum" resultType="java.lang.Integer">
+        select count(1) from menu where del_flag = '1'
+        and p_Id = #{pId}
+    </select>
+    <select id="menuListPage" resultType="com.wmall.bean.Menu">
+        SELECT <include refid="BaseColumn"/> from menu where del_flag = '1'
+        and p_Id = #{pId}
+    </select>
+</mapper>

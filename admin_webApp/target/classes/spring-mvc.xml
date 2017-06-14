@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
+    <context:component-scan base-package="com.wmall" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+    <!-- 定义切面功能 -->
+    <aop:aspectj-autoproxy proxy-target-class="true">
+        <aop:include name="controllerAspect"/>
+    </aop:aspectj-autoproxy>
+    <!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorPathExtension" value="false"/>
+        <property name="favorParameter" value="true"/>
+        <property name="mediaTypes">
+            <map>
+                <entry key="atom" value="application/atom+xml"/>
+                <entry key="html" value="text/html"/>
+                <entry key="json" value="application/json"/>
+                <entry key="xml" value="application/xml"/>
+            </map>
+        </property>
+    </bean>
+    <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/page/"/>
+        <property name="suffix" value=".jsp"/>
+        <!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <!-- page格式转换 -->
+        <property name="webBindingInitializer">
+            <bean class="com.wmall.springMvc.PageBinder"/>
+        </property>
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <constructor-arg value="UTF-8"/>
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                            <value>text/plain;charset=UTF-8</value>
+                            <value>text/xml;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>image/jpeg</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+                <!-- spring具有将数据转化后再交给controller的功能，spring 3 新增了对json的处理能力， 是基于Jackson JSON Processor（http://jackson.codehaus.org/）的， 使用时要配置一下 在上面的AnnotationMethodHandlerAdapter配置中引用这个bean -->
+                <bean id="mappingJacksonHttpMessageConverter"
+                      class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                    <!-- 解决 HttpMediaTypeNotAcceptableException: Could not find acceptable representation -->
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+    </mvc:annotation-driven>
+</beans>
