@@ -20,21 +20,19 @@
    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
           <property name="location" value="classpath:config.properties" />
    </bean>
-   <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
-        <property name="driverClassName" value="${db.driver}" />
-        <property name="url" value="${db.url}" />
-        <property name="username" value="${db.username}" />
-        <property name="password" value="${db.password}" />
-        <!-- 初始化连接大小 -->
-        <property name="initialSize" value="${initialSize}"/>
-        <!-- 连接池最大数量 -->
-        <property name="maxActive" value="${maxActive}"/>
-        <!-- 连接池最大空闲 -->
-        <property name="maxIdle" value="${maxIdle}"/>
-        <!-- 连接池最小空闲 -->
-        <property name="minIdle" value="${minIdle}"/>
-        <!-- 获取连接最大等待时间 -->
-        <property name="maxWait" value="${maxWait}"/>
+   <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+       <property name="driverClass" value="${c3p0.driverClass}"/>
+       <property name="jdbcUrl" value="${c3p0.jdbcUrl}"/>
+       <property name="user" value="${c3p0.user}"/>
+       <property name="password" value="${c3p0.password}"/>
+       <property name="acquireIncrement" value="${c3p0.acquireIncrement}"/><!--当连接池中的连接用完时，C3P0一次性创建新连接的数目-->
+       <property name="minPoolSize" value="${c3p0.minPoolSize}"/><!--连接池中保留的最小连接数-->
+       <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/><!--连接池中保留的最大连接数-->
+       <property name="initialPoolSize" value="${c3p0.initialPoolSize}"/><!--初始化时创建的连接数，应在minPoolSize与maxPoolSize之间取值-->
+       <property name="maxIdleTime" value="${c3p0.maxIdleTime}"/><!--最大空闲时间，超过空闲时间的不在使用的连接将被丢弃。0表示永不丢弃-->
+       <property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/><!--隔多少秒检查所有连接池中的空闲连接-->
+       <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/><!--定义在从数据库获取新连接失败后重复尝试获取的次数-->
+
    </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -58,4 +56,5 @@
          <property name="dataSource" ref="dataSource" />
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
+    <import resource="applicationContext-dubbo.xml"/>
 </beans>

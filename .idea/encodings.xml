@@ -5,7 +5,7 @@
     <file url="file://$PROJECT_DIR$/admin_webApp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tool_comm" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tool_comm/src/main/java/com/wmall/pageplug/PageInterceptor.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/tool_comm/src/main/java/com/wmall/pageplug/ReflectHelper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/tool_comm/src/main/java/com/wmall/pageplug/ReflectHelper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tool_comm/src/main/java/com/wmall/vo/Pager.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wmall_client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wmall_service" charset="UTF-8" />

@@ -1,7 +1,9 @@
 com\wmall\bean\Menu.class
-com\wmall\vo\TreeRespVO.class
+com\wmall\service\UserService.class
+com\wmall\qo\UserQo.class
 com\wmall\vo\Item.class
 com\wmall\vo\Tree.class
 com\wmall\vo\AdditionalParameters.class
 com\wmall\qo\MenuQo.class
 com\wmall\service\MenuService.class
+com\wmall\bean\User.class

@@ -1,5 +1,6 @@
 com\wmall\springMvc\PageBinder.class
 com\wmall\util\JsonUtil.class
+com\wmall\util\OgnlUtil.class
 com\wmall\vo\Pager.class
 com\wmall\vo\ReturnArgs.class
 com\wmall\bean\AppError.class

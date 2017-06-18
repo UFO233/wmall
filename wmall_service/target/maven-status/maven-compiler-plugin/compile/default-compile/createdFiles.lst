@@ -1,2 +1,5 @@
 com\wmall\service\impl\MenuServiceImpl.class
+com\wmall\mapper\UserDao.class
+com\wmall\service\impl\UserServiceImpl.class
+com\wmall\ServerStart.class
 com\wmall\mapper\MenuDao.class

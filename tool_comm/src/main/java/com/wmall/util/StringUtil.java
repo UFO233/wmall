@@ -143,10 +143,7 @@ public class StringUtil {
         if (obj == null) {
             return true;
         }
-        if (StringUtil.isBlank(obj.toString())) {
-            return true;
-        }
-        return false;
+        return StringUtil.isBlank(obj.toString());
     }
 
     /**
@@ -160,10 +157,7 @@ public class StringUtil {
         if (obj == null) {
             return false;
         }
-        if (StringUtil.isBlank(obj.toString())) {
-            return false;
-        }
-        return true;
+        return !StringUtil.isBlank(obj.toString());
     }
 
     /**
@@ -387,10 +381,7 @@ public class StringUtil {
         if (o == null) {
             return true;
         }
-        if (StringUtils.isBlank(o.toString())) {
-            return true;
-        }
-        return false;
+        return StringUtils.isBlank(o.toString());
     }
 
     /**
@@ -405,10 +396,7 @@ public class StringUtil {
         if (o == null) {
             return false;
         }
-        if (StringUtils.isBlank(o.toString())) {
-            return false;
-        }
-        return true;
+        return !StringUtils.isBlank(o.toString());
     }
 
     /**
@@ -419,11 +407,7 @@ public class StringUtil {
      */
     public static boolean isTrueInteger(String number) {
         String test = "\\d+";
-        if (number != null && Pattern.compile(test).matcher(number).matches()) {
-            return  true;
-        } else {
-            return false;
-        }
+        return number != null && Pattern.compile(test).matcher(number).matches();
     }
 
     /**
@@ -441,25 +425,13 @@ public class StringUtil {
 
             String test = "\\d+.\\d+";
 
-            if (number != null && Pattern.compile(test).matcher(number).matches()) {
-
-                rs = true;
-            } else {
-
-                rs = false;
-            }
+            rs = number != null && Pattern.compile(test).matcher(number).matches();
 
         } else {
 
             String test = "\\d+";
 
-            if (number != null && Pattern.compile(test).matcher(number).matches()) {
-
-                rs = true;
-            } else {
-
-                rs = false;
-            }
+            rs = number != null && Pattern.compile(test).matcher(number).matches();
 
         }
 
@@ -617,11 +589,7 @@ public class StringUtil {
         if (isEmpty(num)) {
             return false;
         } else {
-            if (num > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return num > 0;
         }
     }
 

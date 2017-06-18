@@ -1,2 +1,4 @@
+com\wmall\interceptor\AppExceptionHandler.class
+com\wmall\controller\system\UserController.class
+com\wmall\controller\system\MenuController.class
 com\wmall\controller\BaseController.class
-com\wmall\controller\MenuController.class

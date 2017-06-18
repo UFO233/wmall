@@ -1,14 +1,12 @@
-package com.wmall.controller;
+package com.wmall.controller.system;
 
 import com.wmall.bean.AppError;
 import com.wmall.bean.Menu;
+import com.wmall.controller.BaseController;
 import com.wmall.qo.MenuQo;
 import com.wmall.service.MenuService;
 import com.wmall.util.StringUtil;
-import com.wmall.vo.Pager;
-import com.wmall.vo.ReturnDO;
-import com.wmall.vo.Tree;
-import com.wmall.vo.TreeRespVO;
+import com.wmall.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("menu")
-public class MenuController extends BaseController{
+public class MenuController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(MenuController.class);
 
     @Autowired
@@ -35,7 +33,7 @@ public class MenuController extends BaseController{
     public String getMenus(ModelMap map1){
         List<Tree<Menu>> menuList = menuService.menuTree();
         map1.put("menuList", menuList);
-        return "system/menu";
+        return "home";
     }
 
     /**
@@ -52,14 +50,14 @@ public class MenuController extends BaseController{
     @RequestMapping("getTreeData")
     @ResponseBody
     public String jsonTree(String pId){
-        TreeRespVO respVO = menuService.aceTree(pId);
-        return toObjJson(respVO);
+        List<Item> items = menuService.aceTree(pId);
+        return toObjJson(items);
     }
 
     /**
      * 获取列表
      */
-    @RequestMapping("menuList")
+    @RequestMapping(value = "menuList")
     @ResponseBody
     public String getData(HttpServletRequest request,String parentId){
         MenuQo menuQo = new MenuQo();

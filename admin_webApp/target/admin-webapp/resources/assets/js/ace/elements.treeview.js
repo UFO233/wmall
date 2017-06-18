@@ -12,9 +12,9 @@
 			'selected-icon' : ace.vars['icon'] + 'fa fa-check',
 			'unselected-icon' : ace.vars['icon'] + 'fa fa-times',
 			'loadingHTML': 'Loading...'
-		}
+		};
 	
-		$options = $.extend({}, $options, options)
+		$options = $.extend({}, $options, options);
 		this.each(function() {
 			var $this = $(this);
 			$this.addClass('tree').attr('role', 'tree');

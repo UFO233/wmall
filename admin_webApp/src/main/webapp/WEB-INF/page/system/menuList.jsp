@@ -66,8 +66,8 @@
 <script src="/resources/assets/js/date-time/bootstrap-datetimepicker.js"></script>
 <script src="/resources/assets/js/bootstrap-colorpicker.js"></script>
 <script src="/resources/js/lib/layer.js"></script>
-<script src="/resources/assets/js/fuelux/fuelux.tree.js?v=${version}111"></script>
-<script src="/resources/assets/js/ace-elements.js?v=${version}111"></script>
+<script src="/resources/assets/js/fuelux/fuelux.tree.js?v=${version}"></script>
+<script src="/resources/assets/js/ace-elements.js?v=${version}"></script>
 <script src="/resources/assets/js/ace.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -79,6 +79,7 @@
     var queryConditions = {
         matchCon: ""
     }, THISPAGE = {
+
         init: function () {
             this.initDom();
             this.loadGrid();
@@ -97,21 +98,21 @@
                 name: "name",
                 label: "菜单名称",
                 index: "name",
-                sortable: false,
+                sortable: true,
                 width: 90,
                 align: "center"
             }, {
                 name: "level",
                 label: "层级",
                 index: "level",
-                sortable: false,
+                sortable: true,
                 width: 90,
                 align: "center"
             }, {
                 name: "oStatus",
                 label: "操作",
                 index: "oStatus",
-                sortable: false,
+                sortable: true,
                 width: 140,
                 align: "center",
                 formatter: function (cellValue, options, rowObject) {
@@ -123,21 +124,21 @@
                 }
             }];
             i.markRow = [];
+            queryConditions.parentId = $("#parentId").val();
             jQuery("#grid-table").jqGrid({
                 url: "/menu/menuList.do",
                 mType: "post",
                 postData: queryConditions,
-                dataType: "json",
+                dataType: 'json',
                 colModel: column,
                 viewRecords: true,
+                gridView:true, //加速显示
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 pager: "#grid-pager",
                 height: "auto",
                 loadComplete: function () {
                     var table = this;
-                    $("#countDiv").hide();
-                    $("#btnCount").val(true);
                     setTimeout(function () {
                         updatePagerIcons(table);
                         var sb = [];
@@ -222,6 +223,7 @@
                 })
             }
         };
+        var remoteDateSource =
         $('#menuTree').aceTree({
             dataSource: remoteDateSource,
             multiSelect: false,

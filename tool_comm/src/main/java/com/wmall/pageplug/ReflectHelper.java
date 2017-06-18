@@ -113,10 +113,10 @@ public class ReflectHelper {
     public static Object getPropertyByProprtyName(Object object, String fieldName) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         String firstLetter = fieldName.substring(0, 1).toUpperCase();
         String getter = "get" + firstLetter + fieldName.substring(1);
-        Method method = object.getClass().getMethod(getter, new Class[] {});
+        Method method = object.getClass().getMethod(getter);
         // 关闭安全�?查提高效�?
         method.setAccessible(true);
-        Object value = method.invoke(object, new Object[] {});
+        Object value = method.invoke(object);
         method.setAccessible(false);
         return value;
     }

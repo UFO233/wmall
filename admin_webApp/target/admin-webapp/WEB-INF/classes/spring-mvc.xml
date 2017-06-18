@@ -80,4 +80,6 @@
     </bean>
     <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
     </mvc:annotation-driven>
+    <!--Controller方法中抛出异常的处理-->
+    <bean id="exceptionHandler" class="com.wmall.interceptor.AppExceptionHandler"/>
 </beans>

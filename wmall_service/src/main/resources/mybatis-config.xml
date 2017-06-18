@@ -10,7 +10,7 @@
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
     <plugins>
-        <plugin interceptor="com.tarena.pagePlug.PageInterceptor">
+        <plugin interceptor="com.wmall.pageplug.PageInterceptor">
             <property name="dialect" value="Mysql"/>
             <property name="pageSqlId" value=".*ListPage.*"/>
         </plugin>

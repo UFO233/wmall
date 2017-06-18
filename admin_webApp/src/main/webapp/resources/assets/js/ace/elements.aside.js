@@ -9,7 +9,7 @@
 		var placement = 'right', vertical = false;
 		var backdrop = '', invisible_backdrop = false;
 		
-		var options = {}
+		var options = {};
 		options.fixed = settings.fixed || $modal.attr('data-fixed') == 'true';
 		options.dark = settings.background || $modal.attr('data-background') == 'true';
 		options.offset = settings.offset || $modal.attr('data-offset') == 'true';
@@ -68,14 +68,14 @@
 				$modal.addClass('no-backdrop');
 			}
 			else if(backdrop === 'invisible') invisible_backdrop = true;
-		}
+		};
 		
 		
 		this.show = function() {
 			$modal
 			.css('position', 'fixed')
 			.removeClass('aside-hidden');
-		}
+		};
 		
 		this.hide = function() {
 			toggleButton();
@@ -86,7 +86,7 @@
 					$modal.css('position', '');
 				}).emulateTransitionEnd(350);
 			}
-		}
+		};
 		
 		this.shown = function() {
 			toggleButton();
@@ -130,18 +130,18 @@
 				}
 				else content.css('max-height', (!vertical ? dialog.height() : content.height())+'px');
 			}).triggerHandler('resize.modal.aside');
-		}
+		};
 		
 		
 		this.hidden = function() {
-			$window.off('.aside')
+			$window.off('.aside');
 			//$modal.off('.aside')
 			//
 			if( !ace.vars['transition'] || $modal.hasClass('fade') ) {
 				$modal.addClass('aside-hidden');
 				$modal.css('position', '');
 			}
-		}
+		};
 		
 		
 		this.insideContainer = function() {
@@ -162,13 +162,13 @@
 					ace.helper.redraw(container[0]);
 				}
 			}
-		}
+		};
 		
 		this.flip = function() {
 			var flipSides = {right : 'left', left : 'right', top: 'bottom', bottom: 'top'};
 			$modal.removeClass('aside-'+placement).addClass('aside-'+flipSides[placement]);
 			placement = flipSides[placement];
-		}
+		};
 
 		var toggleButton = function() {
 			var btn = $modal.find('.aside-trigger');
@@ -178,7 +178,7 @@
 			var icon = btn.find(ace.vars['.icon']);
 			if(icon.length == 0) return;
 			icon.toggleClass(icon.attr('data-icon1') + " " + icon.attr('data-icon2'));
-		}
+		};
 		
 
 		this.initiate();
@@ -199,7 +199,7 @@
 	})
 	.on('hidden.bs.modal', '.modal.aside', function(e) {
 		$(this).ace_aside('hidden');
-	})
+	});
 	
 	
 

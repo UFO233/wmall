@@ -244,7 +244,7 @@ Date.prototype.format = function (fmt) { //author: meizz
             var fTmp = 0.00;//临时变量
             var iFra = 0;//小数部分
             var iInt = 0;//整数部分
-            var aBuf = new Array(); //输出缓存
+            var aBuf = []; //输出缓存
             var bPositive = true; //保存正负值标记(true:正数)
             /**
              * 输出定长字符串，不够补0
@@ -254,13 +254,12 @@ Date.prototype.format = function (fmt) { //author: meizz
              */
             function funZero(iVal, iLen) {
                 var sTmp = iVal.toString();
-                var sBuf = new Array();
+                var sBuf = [];
                 for (var i = 0, iLoop = iLen - sTmp.length; i < iLoop; i++)
                     sBuf.push('0');
                 sBuf.push(sTmp);
                 return sBuf.join('');
-            };
-
+            }
             if (typeof(iAccuracy) === 'undefined')
                 iAccuracy = 2;
             bPositive = (mVal >= 0);//取出正负号
@@ -972,7 +971,7 @@ function changeDates(type, beginTime, endTime) {
         now.setMonth(now.getMonth() + 1);
         now.setDate(1);
         now.setHours(0);
-        now.setMinutes(0)
+        now.setMinutes(0);
         now.setSeconds(0);
         now.setTime(now.getTime() - 1000);
         end = now.format('yyyy-MM-dd hh:mm:ss');

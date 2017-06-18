@@ -197,7 +197,7 @@
    	 		var curIndex=0;
    	 		//文件数据数值，格式：文件ID|文件路径|原始文件名|文件类型|新的文件名|文件大小KB;文件路径|原始文件名|文件类型|新的文件名|文件大小KB
        	 	//新上传文件文件ID为空
-       	 	var existDataArr = new Array();
+       	 	var existDataArr = [];
 			$(document).ready(function(){
             	 function ForDight(Dight,How){  
                      Dight = Math.round(Dight*Math.pow(10,How))/Math.pow(10,How);  
@@ -212,7 +212,7 @@
             			 for(var i=0;i<existDataArr.length;i++){
             				 if(existDataArr[i] != ""){
             					 var oneArr = existDataArr[i].split("|");
-            					 var oriName = oneArr[2].substring(0, oneArr[2].lastIndexOf("."))
+            					 var oriName = oneArr[2].substring(0, oneArr[2].lastIndexOf("."));
             					 oriName = autoAddEllipsis(oriName, <%=originalFileNameLength%>);
             					 html += "<tr id='preview-" + curIndex + "' data-fileindex='" + curIndex + "'>"
             					 			+ "<td align='center' width='30px'>"+Number(curIndex + 1) +"</td>"
@@ -453,7 +453,7 @@
     				onUploadSuccess: function(file,resData,resultFlag){
     					if(resultFlag){
     						var saveName = resData.substring(resData.lastIndexOf("/")+1).replace(file.type,"");
-	       					var oriName = file.name.substring(0, file.name.lastIndexOf("."))
+	       					var oriName = file.name.substring(0, file.name.lastIndexOf("."));
        					 	oriName = autoAddEllipsis(oriName, <%=originalFileNameLength%>);
     						var html = "<tr id='preview-" + curIndex + "' data-fileindex='" + curIndex + "'>"
 							 			+ "<td align='center' width='30px'>"+Number(curIndex + 1) +"</td>"

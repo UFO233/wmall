@@ -3,13 +3,13 @@
 */
 
 (function($ , undefined) {
-	var ajax_loaded_scripts = {}
+	var ajax_loaded_scripts = {};
 
 	function AceAjax(contentArea, options) {
 		var $contentArea = $(contentArea);
 		var self = this;
 		
-		 var content_url = options.content_url || false
+		 var content_url = options.content_url || false;
 		 var default_url = options.default_url || false;
 		var loading_icon = options.loading_icon || 'fa-spinner fa-2x orange';
 		var loading_text = options.loading_text || '';
@@ -28,14 +28,14 @@
 			
 			if(typeof content_url === 'function') url = content_url(hash);
 			if(typeof url === 'string') this.getUrl(url, hash, false);
-		}
+		};
 		this.getUrl = function(url, hash, manual_trigger) {
 			if(working) {
 				return;
 			}
 		
-			var event
-			$contentArea.trigger(event = $.Event('ajaxloadstart'), {url: url, hash: hash})
+			var event;
+			$contentArea.trigger(event = $.Event('ajaxloadstart'), {url: url, hash: hash});
 			if (event.isDefaultPrevented()) return;
 			
 			self.startLoading();
@@ -50,9 +50,9 @@
 			})
 			.done(function(result) {
 				$contentArea.trigger('ajaxloaddone', {url: url, hash: hash});
-				
-				var link_element = null, link_text = '';;
-				if(typeof update_active === 'function') {
+
+	var link_element = null, link_text = '';
+					if(typeof update_active === 'function') {
 					link_element = update_active.call(null, hash, url);
 				}
 				else if(update_active === true) {
@@ -68,7 +68,7 @@
 								if(close_active) {
 									$(this).find(' > .submenu').css('display', '');
 								}
-							})
+							});
 							
 							var active_li = link_element.closest('li').addClass('active').parents('.nav li').addClass('active open');
 							nav.closest('.sidebar[data-sidebar-scroll=true]').each(function() {
@@ -92,7 +92,7 @@
 				//convert "title" and "link" tags to "div" tags for later processing
 				result = String(result)
 					.replace(/<(title|link)([\s\>])/gi,'<div class="hidden ajax-append-$1"$2')
-					.replace(/<\/(title|link)\>/gi,'</div>')
+					.replace(/<\/(title|link)\>/gi,'</div>');
 			
 				$contentArea.empty().html(result);
 				$contentArea.css('opacity', 0.6);
@@ -101,7 +101,7 @@
 				setTimeout(function() {
 					$('head').find('link.ace-ajax-stylesheet').remove();
 
-					var main_selectors = ['link.ace-main-stylesheet', 'link#main-ace-style', 'link[href*="/ace.min.css"]', 'link[href*="/ace.css"]']
+					var main_selectors = ['link.ace-main-stylesheet', 'link#main-ace-style', 'link[href*="/ace.min.css"]', 'link[href*="/ace.css"]'];
 					var ace_style = [];
 					for(var m = 0; m < main_selectors.length; m++) {
 						ace_style = $('head').find(main_selectors[m]).first();
@@ -111,7 +111,7 @@
 					$contentArea.find('.ajax-append-link').each(function(e) {
 						var $link = $(this);
 						if ( $link.attr('href') ) {
-							var new_link = jQuery('<link />', {type : 'text/css', rel: 'stylesheet', 'class': 'ace-ajax-stylesheet'})
+							var new_link = jQuery('<link />', {type : 'text/css', rel: 'stylesheet', 'class': 'ace-ajax-stylesheet'});
 							if( ace_style.length > 0 ) new_link.insertBefore(ace_style);
 							else new_link.appendTo('head');
 							new_link.attr('href', $link.attr('href'));//we set "href" after insertion, for IE to work
@@ -140,7 +140,7 @@
 				
 				self.stopLoading();
 			})
-		}
+		};
 		
 		
 		///////////////////////
@@ -159,13 +159,13 @@
 				loadTimer = null;
 				if(!working) return;
 				
-				var event
-				$contentArea.trigger(event = $.Event('ajaxloadlong'))
+				var event;
+				$contentArea.trigger(event = $.Event('ajaxloadlong'));
 				if (event.isDefaultPrevented()) return;
 				
 				self.stopLoading(true);
 			 }, max_load_wait * 1000);
-		}
+		};
 		
 		this.stopLoading = function(stopNow) {
 			if(stopNow === true) {
@@ -180,12 +180,12 @@
 				}
 			}
 			else {
-				$contentArea.css('opacity', 0.75)
+				$contentArea.css('opacity', 0.75);
 				$contentArea.one('ajaxscriptsloaded', function() {
 					self.stopLoading(true);
 				})
 			}
-		}
+		};
 		///////////////////////
 		
 		
@@ -309,7 +309,7 @@
 				}
 
 			}, 10)
-		}
+		};
 		
 		
 		

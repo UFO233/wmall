@@ -3,9 +3,9 @@
 */
 
 (function($ , undefined) {
-	if( !('ace' in window) ) window['ace'] = {}
-	if( !('helper' in window['ace']) ) window['ace'].helper = {}
-	if( !('vars' in window['ace']) ) window['ace'].vars = {}
+	if( !('ace' in window) ) window['ace'] = {};
+	if( !('helper' in window['ace']) ) window['ace'].helper = {};
+	if( !('vars' in window['ace']) ) window['ace'].vars = {};
 	window['ace'].vars['icon'] = ' ace-icon ';
 	window['ace'].vars['.icon'] = '.ace-icon';
 
@@ -16,11 +16,11 @@
 	
 	//sometimes the only good way to work around browser's pecularities is to detect them using user-agents
 	//though it's not accurate
-	var agent = navigator.userAgent
-	ace.vars['webkit'] = !!agent.match(/AppleWebKit/i)
+	var agent = navigator.userAgent;
+	ace.vars['webkit'] = !!agent.match(/AppleWebKit/i);
 	ace.vars['safari'] = !!agent.match(/Safari/i) && !agent.match(/Chrome/i);
-	ace.vars['android'] = ace.vars['safari'] && !!agent.match(/Android/i)
-	ace.vars['ios_safari'] = !!agent.match(/OS ([4-9])(_\d)+ like Mac OS X/i) && !agent.match(/CriOS/i)
+	ace.vars['android'] = ace.vars['safari'] && !!agent.match(/Android/i);
+	ace.vars['ios_safari'] = !!agent.match(/OS ([4-9])(_\d)+ like Mac OS X/i) && !agent.match(/CriOS/i);
 	
 	ace.vars['ie'] = window.navigator.msPointerEnabled || (document.all && document.querySelector);//8-11
 	ace.vars['old_ie'] = document.all && !document.addEventListener;//8 and below
@@ -112,7 +112,7 @@ jQuery(function($) {
 	function handleScrollbars() {
 		//add scrollbars for navbar dropdowns
 		var has_scroll = !!$.fn.ace_scroll;
-		if(has_scroll) $('.dropdown-content').ace_scroll({reset: false, mouseWheelLock: true})
+		if(has_scroll) $('.dropdown-content').ace_scroll({reset: false, mouseWheelLock: true});
 
 		//reset scrolls bars on window resize
 		if(has_scroll && !ace.vars['old_ie']) {//IE has an issue with widget fullscreen on ajax?!!!
@@ -159,8 +159,8 @@ jQuery(function($) {
 		//prevent dropdowns from hiding when a tab is selected
 		$(document).on('click', '.dropdown-navbar .nav-tabs', function(e){
 			e.stopPropagation();
-			var $this , href
-			var that = e.target
+			var $this , href;
+			var that = e.target;
 			if( ($this = $(e.target).closest('[data-toggle=tab]')) && $this.length > 0) {
 				$this.tab('show');
 				e.preventDefault();
@@ -273,28 +273,28 @@ jQuery(function($) {
 	function bsCollapseToggle() {
 		//bootstrap collapse component icon toggle
 		$(document).on('hide.bs.collapse show.bs.collapse', function (ev) {
-			var panel_id = ev.target.getAttribute('id')
+			var panel_id = ev.target.getAttribute('id');
 			var panel = $('a[href*="#'+ panel_id+'"]');
 			if(panel.length == 0) panel = $('a[data-target*="#'+ panel_id+'"]');
 			if(panel.length == 0) return;
 
 			panel.find(ace.vars['.icon']).each(function(){
-				var $icon = $(this)
+				var $icon = $(this);
 
-				var $match
-				var $icon_down = null
-				var $icon_up = null
+				var $match;
+				var $icon_down = null;
+				var $icon_up = null;
 				if( ($icon_down = $icon.attr('data-icon-show')) ) {
 					$icon_up = $icon.attr('data-icon-hide')
 				}
 				else if( $match = $icon.attr('class').match(/fa\-(.*)\-(up|down)/) ) {
-					$icon_down = 'fa-'+$match[1]+'-down'
+					$icon_down = 'fa-'+$match[1]+'-down';
 					$icon_up = 'fa-'+$match[1]+'-up'
 				}
 
 				if($icon_down) {
-					if(ev.type == 'show') $icon.removeClass($icon_down).addClass($icon_up)
-						else $icon.removeClass($icon_up).addClass($icon_down)
+					if(ev.type == 'show') $icon.removeClass($icon_down).addClass($icon_up);
+						else $icon.removeClass($icon_up).addClass($icon_down);
 						
 					return false;//ignore other icons that match, one is enough
 				}
@@ -316,7 +316,7 @@ jQuery(function($) {
 	  .on('hidden.bs.dropdown.navbar', function(e) {
 		$(window).off('resize.navbar.dropdown');
 		resetNavbarDropdown.call(this);
-	  })
+	  });
 	 
 	  function adjustNavbarDropdown() {
 		var $sub = $(this).find('> .dropdown-menu');
@@ -420,7 +420,7 @@ jQuery(function($) {
 
 				var size = parseInt($(this).attr('data-size') || 0) || $.fn.ace_scroll.defaults.size;
 				$(this).ace_scroll('update', {size: size}).ace_scroll('enable').ace_scroll('reset');
-			})
+			});
 			
 			if( $sub.hasClass('user-menu') ) {
 				var user_info = 
@@ -433,7 +433,7 @@ jQuery(function($) {
 	  }
 	}
 
-})
+});
 
 
 
@@ -452,34 +452,34 @@ ace.helper.redraw = function(elem, force) {
 			elem.style.display = saved_val;
 		}, 10);
 	}
-}
+};
 
 ace.helper.boolAttr = function(elem, attr) {
 	return elem.getAttribute(attr) === "true";
-}
+};
 ace.helper.intAttr = function(elem, attr) {
 	return parseInt(elem.getAttribute(attr)) || 0;
-}
+};
 
 ace.helper.scrollTop = function() {
-	return document.scrollTop || document.documentElement.scrollTop || document.body.scrollTop
+	return document.scrollTop || document.documentElement.scrollTop || document.body.scrollTop;
 	//return $(window).scrollTop();
-}
+};
 ace.helper.winHeight = function() {
 	return window.innerHeight || document.documentElement.clientHeight;
 	//return $(window).innerHeight();
-}
+};
 ace.helper.camelCase = function(str) {
 	return str.replace(/-([\da-z])/gi, function(match, chr) {
 	  return chr ? chr.toUpperCase() : '';
 	});
-}
+};
 ace.helper.removeStyle = 
   'removeProperty' in document.documentElement.style
   ?
   function(elem, prop) { elem.style.removeProperty(prop) }
   :
-  function(elem, prop) { elem.style[ace.helper.camelCase(prop)] = '' }
+  function(elem, prop) { elem.style[ace.helper.camelCase(prop)] = '' };
 
 
 ace.helper.hasClass = 
@@ -487,5 +487,5 @@ ace.helper.hasClass =
   ?
   function(elem, className) { return elem.classList.contains(className); }
   :
-  function(elem, className) { return elem.className.indexOf(className) > -1; }
+  function(elem, className) { return elem.className.indexOf(className) > -1; };
 	  

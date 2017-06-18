@@ -2,10 +2,10 @@ package com.wmall.service;
 
 import com.wmall.bean.Menu;
 import com.wmall.qo.MenuQo;
+import com.wmall.vo.Item;
 import com.wmall.vo.Pager;
 import com.wmall.vo.ReturnDO;
 import com.wmall.vo.Tree;
-import com.wmall.vo.TreeRespVO;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface MenuService {
 
     List<Tree<Menu>> menuTree();
 
-    TreeRespVO aceTree(String pId);
+    List<Item> aceTree(String pId);
 
     ReturnDO<Pager<Menu>> listPage(MenuQo menuQo);
 }

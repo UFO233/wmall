@@ -432,7 +432,7 @@
         this.container.find('.btn').addClass(this.settings.buttonClass)//ACE;//s.addClass('btn-default');
         this.container.find('.moveall > i, .move > i').removeClass('icon-arrow-right').addClass('glyphicon glyphicon-arrow-right');
         this.container.find('.removeall > i, .remove > i').removeClass('icon-arrow-left').addClass('glyphicon glyphicon-arrow-left');
-      }
+      };
       if (refresh) {
         refreshSelects(this);
       }

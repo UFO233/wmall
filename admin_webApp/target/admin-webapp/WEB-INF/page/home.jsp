@@ -426,8 +426,8 @@
                 </div>
             </div>
             <div class="page-content" id="page-div">
-                <iframe id="page-content" src="" style="border: 0px;" width="100%"
-                        height="100%" frameborder="0" marginwidth="0" marginheight="0"></iframe>
+                <iframe id="page-content" src="" style="border: 0px; height:auto!important;" width="100%"
+                        frameborder="0" marginwidth="0"></iframe>
             </div>
         </div>
     </div><!-- /.main-content -->

@@ -9,7 +9,7 @@
 		var self = this;
 		this.$sidebar = $(sidebar);
 		this.$sidebar.attr('data-sidebar', 'true');
-		if( !this.$sidebar.attr('id') ) this.$sidebar.attr( 'id' , 'id-sidebar-'+(++sidebar_count) )
+		if( !this.$sidebar.attr('id') ) this.$sidebar.attr( 'id' , 'id-sidebar-'+(++sidebar_count) );
 
 		
 		var duration = options.duration || ace.helper.intAttr(sidebar, 'data-submenu-duration') ||300;//transition duration
@@ -24,19 +24,19 @@
 
 		this.vars = function() {
 			return {'minimized': this.minimized, 'collapsible': this.collapsible, 'horizontal': this.horizontal, 'mobile_view': this.mobile_view}
-		}
+		};
 		this.get = function(name) {
 			if(this.hasOwnProperty(name)) return this[name];
-		}
+		};
 		this.set = function(name, value) {
 			if(this.hasOwnProperty(name)) this[name] = value;
-		}
+		};
 		
 
 		this.ref = function() {
 			//return a reference to self
 			return this;
-		}
+		};
 
 		var toggleIcon = function(minimized) {
 			var icon = $(this).find(ace.vars['.icon']), icon1, icon2;
@@ -52,7 +52,7 @@
 					icon.toggleClass(icon1).toggleClass(icon2);
 				}
 			}
-		}		
+		};
 		
 		var findToggleBtn = function() {
 			var toggle_btn = self.$sidebar.find('.sidebar-collapse');
@@ -61,7 +61,7 @@
 			else toggle_btn = null;
 			
 			return toggle_btn;
-		}
+		};
 		
 		//collapse/expand button
 		this.toggleMenu = function(toggle_btn, save) {
@@ -88,19 +88,19 @@
 
 			//force redraw for ie8
 			if(ace.vars['old_ie']) ace.helper.redraw(sidebar);
-		}
+		};
 		this.collapse = function(toggle_btn, save) {
 			if(this.collapsible) return;
 			this.minimized = false;
 			
 			this.toggleMenu(toggle_btn, save);
-		}
+		};
 		this.expand = function(toggle_btn, save) {
 			if(this.collapsible) return;
 			this.minimized = true;
 			
 			this.toggleMenu(toggle_btn, save);
-		}
+		};
 		
 
 		
@@ -138,21 +138,21 @@
 			}
 
 			$(document).triggerHandler('settings.ace', ['sidebar_collapsed' , this.minimized]);
-		}
+		};
 		
 		//some helper functions
 		this.is_collapsible = function() {
-			var toggle
+			var toggle;
 			return (this.$sidebar.hasClass('navbar-collapse'))
 			&& ((toggle = $('.navbar-toggle[data-target="#'+(this.$sidebar.attr('id')||'')+'"]').get(0)) != null)
-			&&  toggle.scrollHeight > 0
+			&&  toggle.scrollHeight > 0;
 			//sidebar is collapsible and collapse button is visible?
-		}
+		};
 		this.is_mobile_view = function() {
-			var toggle
+			var toggle;
 			return ((toggle = $('.menu-toggler[data-target="#'+(this.$sidebar.attr('id')||'')+'"]').get(0)) != null)
 			&&  toggle.scrollHeight > 0
-		}
+		};
 
 
 		//toggling submenu
@@ -224,7 +224,7 @@
 			}
 
 			
-			var sub_hidden = (sub.scrollHeight == 0)
+			var sub_hidden = (sub.scrollHeight == 0);
 
 			//if not open and visible, let's open it and make it visible
 			if( sub_hidden ) {//being shown now
@@ -257,7 +257,7 @@
 			}
 
 			return false;
-		})
+		});
 
 		var submenu_working = false;
 		this.show = function(sub, $duration, wait) {
@@ -270,7 +270,7 @@
 			
 			var $sub = $(sub);
 			var event;
-			$sub.trigger(event = $.Event('show.ace.submenu'))
+			$sub.trigger(event = $.Event('show.ace.submenu'));
 			if (event.isDefaultPrevented()) return false;
 
 			$sub.css({
@@ -292,13 +292,13 @@
 			var complete = function(ev, trigger) {
 				ev && ev.stopPropagation();
 				$sub
-				.css({'transition-property': '', 'transition-duration': '', overflow:'', height: ''})
+				.css({'transition-property': '', 'transition-duration': '', overflow:'', height: ''});
 				//if(ace.vars['webkit']) ace.helper.redraw(sub);//little Chrome issue, force redraw ;)
 
-				if(trigger !== false) $sub.trigger($.Event('shown.ace.submenu'))
+				if(trigger !== false) $sub.trigger($.Event('shown.ace.submenu'));
 				
 				if(wait !== false) submenu_working = false;
-			}
+			};
 			
 			if( $duration > 0 && !!$.support.transition.end ) {
 			  $sub.one($.support.transition.end, complete);
@@ -314,7 +314,7 @@
 			}
 
 			return true;
-		 }
+		 };
 		 
 		 
 		 this.hide = function(sub, $duration, wait) {
@@ -327,7 +327,7 @@
 		 
 			var $sub = $(sub);
 			var event;
-			$sub.trigger(event = $.Event('hide.ace.submenu'))
+			$sub.trigger(event = $.Event('hide.ace.submenu'));
 			if (event.isDefaultPrevented()) return false;
 
 			$sub.css({
@@ -353,10 +353,10 @@
 				.css({display: 'none', overflow:'', height: '', 'transition-property': '', 'transition-duration': ''})
 				.removeClass('nav-show').addClass('nav-hide')//only for window < @grid-float-breakpoint and .navbar-collapse.menu-min
 
-				if(trigger !== false) $sub.trigger($.Event('hidden.ace.submenu'))
+				if(trigger !== false) $sub.trigger($.Event('hidden.ace.submenu'));
 				
 				if(wait !== false) submenu_working = false;
-			}
+			};;
 
 			if( $duration > 0 && !!$.support.transition.end ) {
 			   $sub.one($.support.transition.end, complete);
@@ -373,7 +373,7 @@
 			}
 
 			return true;
-		 }
+		 };
 
 		 this.toggle = function(sub, $duration) {
 			$duration = $duration || duration;
@@ -384,7 +384,7 @@
 				if( this.hide(sub, $duration) ) return -1;
 			}
 			return 0;
-		 }
+		 };
 
 
 		//sidebar vars
@@ -398,7 +398,7 @@
 			if(this.$sidebar.hasClass('responsive') && !$('.menu-toggler[data-target="#'+this.$sidebar.attr('id')+'"]').hasClass('navbar-toggle')) this.mobile_style = 2;//toggle button behind sidebar
 			 else if(this.$sidebar.hasClass(responsive_min_class)) this.mobile_style = 3;//minimized menu
 			  else if(this.$sidebar.hasClass('navbar-collapse')) this.mobile_style = 4;//collapsible (bootstrap style)
-		}
+		};
 		sidebar_mobile_style.call(self);
 		  
 		function update_vars() {
@@ -408,7 +408,7 @@
 			this.minimized = 
 			(!this.collapsible && this.$sidebar.hasClass(minimized_menu_class))
 			 ||
-			(this.mobile_style == 3 && this.mobile_view && this.$sidebar.hasClass(responsive_min_class))
+			(this.mobile_style == 3 && this.mobile_view && this.$sidebar.hasClass(responsive_min_class));
 
 			this.horizontal = !(this.mobile_view || this.collapsible) && this.$sidebar.hasClass(horizontal_menu_class)
 		}
@@ -500,7 +500,7 @@
 				$(document).off(click_event);
 			}
 		}
-	})
+	});
 	/**
 	.on('shown.bs.collapse.sidebar hidden.bs.collapse.sidebar', '.sidebar[data-auto-hide=true]', function(e){
 		var click_event = ace.click_event+'.ace.autohide';

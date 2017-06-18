@@ -32,7 +32,6 @@
             as.event = win.event ? win.event : laydate.caller.arguments[0];
         } catch (e) {
         }
-        ;
         Dates.run(options);
         return laydate;
     };
@@ -120,12 +119,12 @@
     Dates.query = function (node) {
         var node = (Dates.trim(node)).split(' '), elemId = doc[byid](node[0].substr(1)), arr;
         if (!elemId) {
-            return;
+
         } else if (!node[1]) {
             return elemId;
         } else if (/^\./.test(node[1])) {
             var find, child = node[1].substr(1), exp = new RegExp('\\b' + child + '\\b');
-            arr = []
+            arr = [];
             find = doc.getElementsByClassName ? elemId.getElementsByClassName(child) : elemId[tags]('*');
             Dates.each(find, function (ii, that) {
                 exp.test(that.className) && arr.push(that);
@@ -304,7 +303,6 @@
                     if (Dates.timeVoid(arr[3], 0)) {
                         isvoid.auto = 1;
                     }
-                    ;
                     if (Dates.timeVoid(arr[4], 1)) {
                         isvoid.auto = 1;
                     }
@@ -312,7 +310,6 @@
                     if (Dates.timeVoid(arr[5], 2)) {
                         isvoid.auto = 1;
                     }
-                    ;
                 }
                 if (isvoid.auto) {
                     Dates.creation([arr[0], arr[1] | 0, arr[2] | 0], 1);
@@ -434,7 +431,6 @@
                 str = '国庆';
                 break;
         }
-        ;
         str && (td.innerHTML = str);
         str = null;
     };
@@ -806,7 +802,7 @@
                     Dates.each(new Array(i === 0 ? 24 : 60), function (i) {
                         str += '<span>' + i + '</span>';
                     });
-                    str += '</div>'
+                    str += '</div>';
                     log.hmsarr[i] = str;
                 } else {
                     str = log.hmsarr[i];

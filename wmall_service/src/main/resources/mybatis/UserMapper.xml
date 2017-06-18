@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wmall.mapper.UserDao">
+    <sql id="BaseColumn">
+        id,name,mobile,password,del_flag as delFlag,create_time as createTime
+    </sql>
+    <select id="userListPage" resultType="com.wmall.bean.User">
+        SELECT <include refid="BaseColumn"/> from user where del_flag = '1'
+        <if test="@com.wmall.util.OgnlUtil@isNotEmpty(name)">
+            and name like CONCAT(CONCAT('%', #{name}), '%')
+        </if>
+        <if test="@com.wmall.util.OgnlUtil@isNotEmpty(mobile)">
+            and mobile like CONCAT(CONCAT('%', #{mobile}), '%')
+        </if>
+    </select>
+
+</mapper>

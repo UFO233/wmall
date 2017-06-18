@@ -49,9 +49,8 @@ public class MenuServiceImpl implements MenuService {
      * 获取菜单的根节点(异步获取树 Ace tree)
      */
     @Override
-    public TreeRespVO aceTree(String pId) {
+    public List<Item> aceTree(String pId) {
         List<Menu> menuList = menuDao.getMenus(pId);
-        TreeRespVO vo = new TreeRespVO();
         List<Item> voItemList = new ArrayList<>();
         if (null != menuList && menuList .size() !=0)
         {
@@ -80,8 +79,7 @@ public class MenuServiceImpl implements MenuService {
                 voItemList .add(item );
             }
         }
-        vo.setData( voItemList );
-        return vo;
+        return voItemList;
     }
 
     @Override

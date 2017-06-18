@@ -256,8 +256,6 @@
         for (var opt in opts || {}) {
             me[opt] = opts[opt];
         }
-        ;
-
         var rect = me.paper.rect(150, 150, 150, 150);
 
     };
@@ -271,7 +269,7 @@
                 evt.stopPropagation();
                 evt.preventDefault();
                 return false;
-            }
+            };
             try {
                 addEventListener(c, "mousewheel", wheel);//IE+webkit
                 addEventListener(c, "DOMMouseScroll", wheel);//firefox
@@ -382,7 +380,6 @@
                     for (var i = edges.length - 1; i >= 0; i--) {
                         edges[i].arrow.redraw();
                     }
-                    ;
                     me.nodedragging.timestamp = now;
                     me.nodedragging.x = evt.clientX;
                     me.nodedragging.y = evt.clientY;
@@ -403,7 +400,6 @@
                             for (var i = edges.length - 1; i >= 0; i--) {
                                 edges[i].arrow.unhighlight();
                             }
-                            ;
                             (me.onnodemouseout || function () {
                             }).call(me, evt, me._lastHoverNode);
                         }
@@ -412,7 +408,6 @@
                         for (var i = edges.length - 1; i >= 0; i--) {
                             edges[i].arrow.highlight();
                         }
-                        ;
                         (me.onnodemouseover || function () {
                         }).call(me, evt, me.hovernode);
                     }
@@ -424,7 +419,6 @@
                         for (var i = edges.length - 1; i >= 0; i--) {
                             edges[i].arrow.unhighlight();
                         }
-                        ;
                         (me.onnodemouseout || function () {
                         }).call(me, evt, me._lastHoverNode);
                         me._lastHoverNode = null;
@@ -460,7 +454,6 @@
                 var node = me.nodes[i];
                 node.point = [node.layoutPosX, node.layoutPosY];
             }
-            ;
         },
         _drawNode: function (node) {
             var me = this,
@@ -483,13 +476,11 @@
             for (var i = me.nodes.length - 1; i >= 0; i--) {
                 me._drawNode(me.nodes[i]);
             }
-            ;
             //画箭头
             for (var i = me.edges.length - 1; i >= 0; i--) {
                 me._drawEdge(me.edges[i]);
 
             }
-            ;
         },
         removeNode: function (nodeId) {
             var me = this, node = me.getNode(nodeId), edges = me.getNodeEdges(nodeId);
@@ -497,7 +488,6 @@
             for (var i = edges.length - 1; i >= 0; i--) {
                 edges[i]._shapes && (edges[i]._shapes.remove());
             }
-            ;
             node._shapes && (node._shapes.remove());
             for (var i = me.edges.length - 1; i >= 0; i--) {
                 var edge = me.edges[i];
@@ -520,7 +510,6 @@
             for (var i = edges.length - 1; i >= 0; i--) {
                 edges[i].arrow.redraw();
             }
-            ;
         },
         addNode: function (node) {
             var me = this, vb = me.getViewBox();
@@ -572,7 +561,6 @@
                 edge.target = data.nodes[edge.target] || edge.target;
                 me.edges.push(edge);
             }
-            ;
             me.reset();
             me.layout();
             me.draw();
@@ -588,13 +576,10 @@
                 newEdge.target = edge.target.nodeId;
                 graphData.edges.push(edge);
             }
-            ;
-
             for (var i = me.nodes.length - 1; i >= 0; i--) {
                 var node = me.nodes[i];
                 graphData.nodes[node.nodeId] = node;
             }
-            ;
             me.loadData(graphData);
         },
         getNode: function (nodeId) {
@@ -605,7 +590,6 @@
                     break;
                 }
             }
-            ;
             return node;
         },
         //根据nodeId获取Edges
@@ -618,7 +602,6 @@
                     edges.push(edge);
                 }
             }
-            ;
             return edges;
         },
         setViewBox: function (x, y, w, h, fit) {
@@ -703,4 +686,4 @@
             return this.nodes;
         }
     };
-}(window)
+}(window);

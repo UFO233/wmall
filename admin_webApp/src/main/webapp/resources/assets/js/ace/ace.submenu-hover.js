@@ -17,18 +17,18 @@
 	//el.offsetHeight is used to force redraw and recalculate 'el.style.position' esp. for webkit!
 	function(el, pos) { el.offsetHeight; return window.getComputedStyle(el).position == pos }
 	:
-	function(el, pos) { el.offsetHeight; return $(el).css('position') == pos }
+	function(el, pos) { el.offsetHeight; return $(el).css('position') == pos };
 
 
 
  $(window).on('resize.sidebar.ace_hover', function() {
 	$('.sidebar[data-sidebar-hover=true]').ace_sidebar_hover('update_vars').ace_sidebar_hover('reset');
- })
+ });
 
  $(document).on('settings.ace.ace_hover', function(e, event_name, event_val) {
 	if(event_name == 'sidebar_collapsed') $('.sidebar[data-sidebar-hover=true]').ace_sidebar_hover('reset');
 	else if(event_name == 'navbar_fixed') $('.sidebar[data-sidebar-hover=true]').ace_sidebar_hover('update_vars');
- })
+ });
  
  var sidebars = [];
 
@@ -55,7 +55,7 @@
 	var navbar_fixed = $navbar.css('position') == 'fixed';
 	this.update_vars = function() {
 		navbar_fixed = $navbar.css('position') == 'fixed';
-	}
+	};
 
 	self.dirty = false;
 	//on window resize or sidebar expand/collapse a previously "pulled up" submenu should be reset back to its default position
@@ -79,18 +79,18 @@
 			else $sub.removeClass('can-scroll');
 
 			li.removeClass('pull_up').find('.menu-text:first').css('margin-top', '');
-		})
+		});
 
 		$sidebar.find('.hover-show').removeClass('hover-show hover-shown hover-flip');
-	}
+	};
 	
 	this.updateStyle = function(newStyle) {
 		scroll_style = newStyle;
 		$sidebar.find('.submenu.ace-scroll').ace_scroll('update', {styleClass: newStyle});
-	}
+	};
 	this.changeDir = function(dir) {
 		scroll_right = (dir === 'right');
-	}
+	};
 	
 	
 	//update submenu scrollbars on submenu hide & show
@@ -231,7 +231,7 @@
 				getSubHide(this).hide();
 			  })
 			}
-		}
+		};
 		
 		this.hide = function() {
 			visible = false;
@@ -243,7 +243,7 @@
 			
 			var sub = $self.find('> .submenu').get(0);
 			if(sub) getSubScroll(sub, 'hide');
-		}
+		};
 		
 		this.hideDelay = function(callback) {
 			if(timer != null) clearTimeout(timer);
@@ -260,7 +260,7 @@
 				
 				if(typeof callback === 'function') callback.call(this);
 			}, hover_delay);
-		}
+		};
 		
 		this.is_visible = function() {
 			return visible;
@@ -290,7 +290,7 @@
 		sub.style.bottom = '';
 
 
-		var menu_text = null
+		var menu_text = null;
 		if( sidebar_vars['minimized'] && (menu_text = $li.find('.menu-text').get(0)) ) {
 			//2nd level items don't have .menu-text
 			menu_text.style.marginTop = '';
@@ -323,7 +323,7 @@
 			extra = parent_height;
 			off.top += extra;
 		}
-		var sub_bottom = parseInt(off.top + sub_h)
+		var sub_bottom = parseInt(off.top + sub_h);
 
 		var move_up = 0;
 		var winh = $window.height();
@@ -438,7 +438,7 @@
 			lastScrollHeight = scroll_height;
 			if(!nativeScroll && ace_scroll) {
 				if(scroll_height > 14 && sub_h - scroll_height > 4) {
-					ace_scroll.enable()
+					ace_scroll.enable();
 					ace_scroll.reset();
 				}			
 				else {
@@ -451,7 +451,7 @@
 					track.style.top = -(move_up - extra - 1) + 'px';
 					
 					var off = $sub.position();
-					var left = off.left 
+					var left = off.left;
 					if( !scroll_right ) {
 						left += ($sub.outerWidth() - ace_scroll.track_size());
 					}

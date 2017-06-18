@@ -26,7 +26,7 @@
 		$.ajax({
 			'url': stylesheet_url
 		}).done(function() {
-			var new_link = jQuery('<link />', {type : 'text/css', rel: 'stylesheet', 'id': 'ace-skins-stylesheet'})
+			var new_link = jQuery('<link />', {type : 'text/css', rel: 'stylesheet', 'id': 'ace-skins-stylesheet'});
 			if(ace_style.length > 0){
 				new_link.insertAfter(ace_style.last());
 			}
@@ -70,11 +70,11 @@
 			
 			//undo skin-3
 			$('.ace-nav > li.grey').removeClass('red').find('.badge').removeClass('badge-yellow');
-			$('.sidebar-shortcuts .btn').removeClass('btn-primary btn-white')
+			$('.sidebar-shortcuts .btn').removeClass('btn-primary btn-white');
 			var i = 0;
 			$('.sidebar-shortcuts .btn').each(function() {
 				$(this).find(ace.vars['.icon']).removeClass(skin3_colors[i++]);
-			})
+			});
 		
 		
 
@@ -84,7 +84,7 @@
 			var i = 0;
 			$('.sidebar-shortcuts .btn').each(function() {
 				$(this).attr('class', 'btn ' + skin0_buttons[i++%4]);
-			})
+			});
 			
 			$('.sidebar[data-sidebar-scroll=true]').ace_sidebar_scroll('updateStyle', '');
 			$('.sidebar[data-sidebar-hover=true]').ace_sidebar_hover('updateStyle', 'no-track scroll-thin');
@@ -96,7 +96,7 @@
 			$('.sidebar-shortcuts')
 			.find('.btn').each(function() {
 				$(this).attr('class', 'btn ' + skin0_buttons[i++%4]);
-			})
+			});
 			
 			$('.sidebar[data-sidebar-scroll=true]').ace_sidebar_scroll('updateStyle', 'scroll-white no-track');
 			$('.sidebar[data-sidebar-hover=true]').ace_sidebar_hover('updateStyle', 'no-track scroll-thin scroll-white');
@@ -124,14 +124,14 @@
 			$('.sidebar-shortcuts .btn').each(function() {
 				$(this).attr('class', 'btn btn-primary btn-white');
 				$(this).find(ace.vars['.icon']).addClass(skin3_colors[i++]);
-			})
+			});
 			
 			$('.sidebar[data-sidebar-scroll=true]').ace_sidebar_scroll('updateStyle', 'scroll-dark no-track');
 			$('.sidebar[data-sidebar-hover=true]').ace_sidebar_hover('updateStyle', 'no-track scroll-thin');
 		}
 
 		//some sizing differences may be there in skins, so reset scrollbar size
-		$('.sidebar[data-sidebar-scroll=true]').ace_sidebar_scroll('reset')
+		$('.sidebar[data-sidebar-scroll=true]').ace_sidebar_scroll('reset');
 		//$('.sidebar[data-sidebar-hover=true]').ace_sidebar_hover('reset')
 		
 		if(ace.vars['old_ie']) ace.helper.redraw(document.body, true);

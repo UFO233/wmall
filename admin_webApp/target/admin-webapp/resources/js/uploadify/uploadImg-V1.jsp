@@ -225,7 +225,7 @@
    	 		var curIndex=0;
    	 		//图片数据数值，格式：文件ID|文件路径|原始文件名|文件类型|新的文件名|文件大小KB;文件路径|原始文件名|文件类型|新的文件名|文件大小KB
        	 	//新上传图片文件ID为空
-       	 	var existImgArr = new Array();
+       	 	var existImgArr = [];
 			$(document).ready(function(){
             	 function ForDight(Dight,How){  
                      Dight = Math.round(Dight*Math.pow(10,How))/Math.pow(10,How);  
@@ -240,7 +240,7 @@
             			 for(var i=0;i<existImgArr.length;i++){
             				 if(existImgArr[i] != ""){
             					 var oneArr = existImgArr[i].split("|");
-            					 var oriName = oneArr[2].substring(0, oneArr[2].lastIndexOf("."))
+            					 var oriName = oneArr[2].substring(0, oneArr[2].lastIndexOf("."));
             					 oriName = autoAddEllipsis(oriName, <%=originalFileNameLength%>);
             					 html += "<div class='file-preview-frame' id='preview-" + curIndex + "' data-fileindex='" + curIndex + "'>"
 											+ "<img src='<%=basePath%>/" + oneArr[1] + "' class='file-preview-image' title='" + oneArr[2] + "' alt='" + oneArr[2] + "' style='width:auto;height:<%=previewImgHeight%>;'>"
@@ -484,7 +484,7 @@
     				onUploadSuccess: function(file,resData,resultFlag){
     					if(resultFlag){
     						var saveName = resData.substring(resData.lastIndexOf("/")+1).replace(file.type,"");
-    						var oriName = file.name.substring(0, file.name.lastIndexOf("."))
+    						var oriName = file.name.substring(0, file.name.lastIndexOf("."));
        					 	oriName = autoAddEllipsis(oriName, <%=originalFileNameLength%>);
     						var html = "<div class='file-preview-frame' id='preview-" + curIndex + "' data-fileindex='" + curIndex + "'>"
     									+ "<img src='<%=basePath%>/upload/" + resData + "' class='file-preview-image' title='" + file.name + "' alt='" + file.name + "' style='width:auto;height:<%=previewImgHeight%>;'>"
