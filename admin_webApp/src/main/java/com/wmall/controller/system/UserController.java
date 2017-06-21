@@ -30,7 +30,7 @@ public class UserController extends BaseController {
         return "system/user";
     }
 
-    @RequestMapping("userData")
+    @RequestMapping(value = "userData",produces = {"text/html; charset=utf8"})
     @ResponseBody
     public String getUserData(HttpServletRequest request,String name,String mobile){
         UserQo userQo = new UserQo();

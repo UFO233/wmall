@@ -50,6 +50,7 @@
                         </form>
                     </div>
                     <table id="grid-table"></table>
+                    <div id="grid-pager"></div>
                 </div>
             </div>
         </div>
@@ -118,7 +119,7 @@
                 formatter: function (cellValue, options, rowObject) {
                     var id = rowObject.id;
                     var btns = [];
-                    btns[btns.length] = '<button class="btn btn-primary btn-xs" name="editProdClass" onclick="editProdClass(\'' + id + '\')"><i class="ace-icon fa fa-pencil-square-o"></i>编辑</button> &nbsp;&nbsp;';
+                    btns[btns.length] = '<button class="btn btn-xs" name="editProdClass" onclick="editProdClass(\'' + id + '\')"><i class="ace-icon fa fa-pencil-square-o"></i>编辑</button> &nbsp;&nbsp;';
                     btns[btns.length] = '<button class="btn btn-danger btn-xs" name="delProdClass" onclick="delProdClass(\'' + id + '\',\'' + rowObject.name + '\')"><i class="ace-icon fa fa-trash"></i>删除</button>';
                     return btns.join('');
                 }
@@ -129,26 +130,26 @@
                 url: "/menu/menuList.do",
                 mType: "post",
                 postData: queryConditions,
-                dataType: 'json',
+                datatype: 'json',
                 colModel: column,
                 viewRecords: true,
-                gridView:true, //加速显示
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 pager: "#grid-pager",
                 height: "auto",
-                loadComplete: function () {
+                loadComplete: function (xhr) {
+                    console.log(xhr);
                     var table = this;
                     setTimeout(function () {
                         updatePagerIcons(table);
                         var sb = [];
                         sb[sb.length] = '<button class="btn btn-xs" title="修改"><i class="ace-icon fa fa-pencil-square-o"></i>修改</button> | &nbsp;&nbsp;';
-                        sb[sb.length] = '<button class="btn btn-danger btn-xs" title="删除"><i class="ace-icon fa fa-times"></i>删除</button> ';
+                        sb[sb.length] = '<button class="btn btn-danger btn-xs" title="删除"><i class="ace-icon fa fa-trash"></i>删除</button> ';
                         $("#grid-pager_left").html(sb.join(''));
                     }, 0);
                     $("#grid-table").jqGrid('setGridWidth', $(".widget-box").width());
                 },
-                loadError: function (data) {
+                loadError: function (data,status,error) {
                     if (data.msg) {
                         layer.alert(data.msg, 2);
                     } else if (data.readyState != 0) {

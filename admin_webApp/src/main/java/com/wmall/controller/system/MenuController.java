@@ -57,7 +57,7 @@ public class MenuController extends BaseController {
     /**
      * 获取列表
      */
-    @RequestMapping(value = "menuList")
+    @RequestMapping(value = "menuList",produces = {"application/json; charset=utf8"})
     @ResponseBody
     public String getData(HttpServletRequest request,String parentId){
         MenuQo menuQo = new MenuQo();

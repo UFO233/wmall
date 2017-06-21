@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +122,7 @@
                     url: "/sys/user/userData.do",
                     mType: "post",
                     postData: queryConditions,
-                    dataType: "json",
+                    datatype: "json",
                     colModel: a,
                     viewRecords: true,
                     rowNum: 10,
