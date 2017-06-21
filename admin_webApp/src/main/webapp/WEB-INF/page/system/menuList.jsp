@@ -21,7 +21,7 @@
 <body class="content_page">
 <div class="box_page">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12" style="background-color: #fff">
             <div class="row">
                 <div class="col-sm-3">
                     <div class="widget-body">
