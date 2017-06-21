@@ -13,5 +13,13 @@
             and mobile like CONCAT(CONCAT('%', #{mobile}), '%')
         </if>
     </select>
-
+    <select id="getUser" resultType="com.wmall.bean.User">
+        select <include refid="BaseColumn"/> from user where del_flag = '1'
+        <if test="@com.wmall.util.OgnlUtil@isNotEmpty(mobile)">
+            and mobile = #{mobile}
+        </if>
+        <if test="@com.wmall.util.OgnlUtil@isNotEmpty(password)">
+            and password = #{password}
+        </if>
+    </select>
 </mapper>

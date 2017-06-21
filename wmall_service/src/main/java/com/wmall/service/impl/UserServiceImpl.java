@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by asus-pc on 2017/6/16.
@@ -28,5 +29,11 @@ public class UserServiceImpl implements UserService {
         pager.setResult(menuList);
         rdo.setObj(pager);
         return rdo;
+    }
+
+    @Override
+    public List<User> getUser(Map<String, Object> map) {
+
+        return userDao.getUser(map);
     }
 }
