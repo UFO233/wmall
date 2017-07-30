@@ -51,13 +51,13 @@
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="手机号" name="loginName" data-rule="手机号:required;loginName;length[5~50];"/>
+															<input type="text" class="form-control" placeholder="手机号" name="loginName" value="18355373608" data-rule="手机号:required;loginName;length[5~50];"/>
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" name="loginPwd" data-rule="密码:required;loginPwd;length[6~12];"/>
+															<input type="password" class="form-control" placeholder="密码" name="loginPwd" value="123456" data-rule="密码:required;loginPwd;length[6~12];"/>
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>

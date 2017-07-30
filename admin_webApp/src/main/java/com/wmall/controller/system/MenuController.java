@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by asus-pc on 2017/5/24.
@@ -73,6 +76,29 @@ public class MenuController extends BaseController {
         }else{
             logger.error("菜单列表数据获取失败");
             return new AppError(returnDO.getCoder(), returnDO.getErrorMsg()).toString();
+        }
+    }
+
+    /**
+     * 菜单增加功能
+     */
+    @RequestMapping("addMenu")
+    public String addMenu(){
+
+        return "system/addMenu";
+    }
+
+    @RequestMapping("doAddMenu")
+    @ResponseBody
+    public String add(Menu menu){
+        Map<String,Object> maps = new HashMap<>();
+        maps.put("name",menu.getName());
+
+        ReturnDO<Integer> rdo = menuService.addMenu(menu);
+        if(rdo.isSuccess()){
+            return toObjJson("数据新增成功");
+        }else{
+            return new AppError(rdo.getCoder(),rdo.getErrorMsg()).toString();
         }
     }
 }

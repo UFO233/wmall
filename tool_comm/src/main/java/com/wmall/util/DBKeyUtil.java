@@ -1,13 +1,9 @@
 package com.wmall.util;
 
-import java.text.DecimalFormat;
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import org.apache.log4j.Logger;
+
+import java.text.*;
+import java.util.Calendar;
 
 /**
  *  

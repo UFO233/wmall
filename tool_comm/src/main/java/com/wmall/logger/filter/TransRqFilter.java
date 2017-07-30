@@ -3,10 +3,10 @@ package com.wmall.logger.filter;
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
-import com.zkbr.comm.exception.ParamValidationException;
-import com.zkbr.comm.utils.JsonUtil;
-import com.zkbr.comm.utils.StringUtil;
-import com.zkbr.comm.vo.ReturnDO;
+import com.wmall.exception.ParamValidationException;
+import com.wmall.util.JsonUtil;
+import com.wmall.util.StringUtil;
+import com.wmall.vo.ReturnDO;
 import org.apache.log4j.Logger;
 
 import java.util.Map;
@@ -27,8 +27,6 @@ public class TransRqFilter implements Filter {
         }
         Class<?> serviceType = invoker.getInterface();
         Object[] args = invocation.getArguments();
-
-
         StringBuffer param = new StringBuffer();
         String paramStr;
         String methodName = invocation.getMethodName();

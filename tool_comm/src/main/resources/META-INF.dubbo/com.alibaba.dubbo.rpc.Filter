@@ -1,4 +1,4 @@
-transNo=com.zkbr.comm.logger.filter.TransNoFilter
-transRp=com.zkbr.comm.logger.filter.TransRpFilter
-transRq=com.zkbr.comm.logger.filter.TransRqFilter
-transRe=com.zkbr.comm.logger.filter.TransReFilter
+transNo=com.wmall.logger.filter.TransNoFilter
+transRp=com.wmall.logger.filter.TransRpFilter
+transRq=com.wmall.logger.filter.TransRqFilter
+transRe=com.wmall.logger.filter.TransReFilter

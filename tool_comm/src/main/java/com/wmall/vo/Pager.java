@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 分页信息�?
+ * 分页信息
  * @version 2.0
- * 去除分页对象中存在的html字符串信息，前端的分页不在依赖后端服�?
+ * 去除分页对象中存在的html字符串信息，前端的分页不在依赖后端服
  */
 public class Pager<T> implements Serializable {
     /**
@@ -19,15 +19,15 @@ public class Pager<T> implements Serializable {
      */
     private int size = 15;
     /**
-     * 总条�?
+     * 总条
      */
     private int total = 0;
     /**
-     * 当前�?
+     * 当前
      */
     private int currentPage = 0;
     /**
-     * 总页�?
+     * 总页
      */
     private int totalPage;
     /**
@@ -35,7 +35,7 @@ public class Pager<T> implements Serializable {
      */
     private int currentResult = 0;
     /**
-     * 存放结果�?
+     * 存放结果
      */
     private List<T> result = new ArrayList<T>();
 
@@ -50,7 +50,7 @@ public class Pager<T> implements Serializable {
     }
 
     /**
-     * 获取结果�?
+     * 获取结果
      */
     public List<T> getResult() {
         if (result == null) {
@@ -64,7 +64,7 @@ public class Pager<T> implements Serializable {
     }
 
     /**
-     * 获取总页�?
+     * 获取总页
      */
     public int getTotalPage() {
         if (total % size == 0) {
@@ -76,7 +76,7 @@ public class Pager<T> implements Serializable {
     }
 
     /**
-     * 获取总条�?
+     * 获取总条
      */
     public int getTotal() {
         return total;

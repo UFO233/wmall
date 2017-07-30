@@ -45,21 +45,38 @@ public class LoginController extends BaseController{
     @ResponseBody
     public String loginVilid(HttpSession session,String loginName,String loginPwd){
         Map<String,Object> parms= new HashMap<>();
-        if(StringUtil.isEmpty(loginName) || StringUtil.isEmpty(loginPwd)){
-            return new AppError("222222","用户名或密码不能为空").toString();
-        }else{
-            parms.put("mobile",loginName);
-            List<User> users = userService.getUser(parms);
-            if(users == null || users.size() == 0){
-                return new AppError("222222","用户名或密码不正确").toString();
+        try {
+            if(StringUtil.isEmpty(loginName) || StringUtil.isEmpty(loginPwd)){
+                return new AppError("200001","用户名或密码不能为空").toString();
             }else{
-                String md5Pwd = Md5Tool.encrypt32(loginPwd);
-                if(!users.get(0).getPassword().equals(md5Pwd)){
-                    return new AppError("222222","用户名或密码不正确").toString();
+                parms.put("mobile",loginName);
+                List<User> users = userService.getUser(parms);
+                if(users == null || users.size() == 0){
+                    return new AppError("200002","用户名或密码不正确").toString();
+                }else{
+                    String md5Pwd = Md5Tool.encrypt32(loginPwd);
+                    if(!users.get(0).getPassword().equals(md5Pwd)){
+                        return new AppError("200003","用户名或密码不正确").toString();
+                    }
                 }
+                session.setAttribute(Constant.USER_KEY,users.get(0));
+                return toObjJson("登录成功");
             }
-            session.setAttribute(Constant.USER_KEY,users.get(0));
-            return toObjJson("登录成功");
+        } catch (Exception e) {
+            logger.error("登陆失败原因:", e);
+            e.printStackTrace();
+            return new AppError("999999","登陆失败，服务器网络异常").toString();
         }
+    }
+
+    /**
+     * 系统退出,session清除
+     * @param session
+     * @return
+     */
+    @RequestMapping("logOut")
+    public String logOut(HttpSession session){
+        session.invalidate();
+        return "redirect:/admin/loginPage.do";
     }
 }

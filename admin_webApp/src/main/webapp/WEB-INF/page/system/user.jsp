@@ -109,7 +109,7 @@
                 i.markRow = [];
                 jQuery("#grid-table").jqGrid({
                     url: "/sys/user/userData.do",
-                    mType: "post",
+                    mtype: "post",
                     postData: queryConditions,
                     datatype: "json",
                     colModel: a,
@@ -141,13 +141,13 @@
                 try {
                     this.markRow = [];
                     if (!t) {
-                        queryConditions.userId = $("#name").val();
-                        queryConditions.endTime = $("#mobile").val();
+                        queryConditions.name = $("#name").val();
+                        queryConditions.mobile = $("#mobile").val();
                         t = queryConditions;
                     }
                     $("#grid-table").jqGrid("setGridParam", {
                         url: "/sys/user/userData.do",
-                        dataType: "json",
+                        datatype: "json",
                         postData: t
                     }).trigger("reloadGrid")
                 } catch (e) {

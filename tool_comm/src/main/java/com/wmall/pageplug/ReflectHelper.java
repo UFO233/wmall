@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * Created by asus-pc on 2017/6/8.
- * 反射工具�?
+ * 反射工具
  */
 public class ReflectHelper {
     /**
@@ -20,7 +20,7 @@ public class ReflectHelper {
 
         for(Class<?> superClass = obj.getClass();superClass != Object.class; superClass = superClass.getSuperclass()){
             try {
-                //返回�?�? Field 对象，该对象反映�? Class 对象�?表示的类或接口的指定已声明字段（包括私有成员）�??
+                //返回 Field 对象，该对象反映 Class 对象表示的类或接口的指定已声明字段（包括私有成员）
                 return superClass.getDeclaredField(fieldName);
             }catch (NoSuchFieldException e){
 
@@ -30,7 +30,7 @@ public class ReflectHelper {
     }
 
     /**
-     * 获取obj对象fieldName的属性�??
+     * 获取obj对象fieldName的属性
      * @param obj
      * @param fieldName
      * @return
@@ -44,7 +44,7 @@ public class ReflectHelper {
         Field field = getFieldByFieldName(obj,fieldName);
         Object value = null;
         if(field != null){
-            //由于JDK的安全检查�?�时较多.�?以�?�过setAccessible(true)的方式关闭安全检查就可以达到提升反射速度的目�?
+            //由于JDK的安全检查时较多.过setAccessible(true)的方式关闭安全检查就可以达到提升反射速度的目
             if(field.isAccessible()){
                 value = field.get(obj);
             }else{
@@ -57,7 +57,7 @@ public class ReflectHelper {
     }
 
     /**
-     * 设置obj对象fieldName的属性�??
+     * 设置obj对象fieldName的属性
      *
      * @param obj
      * @param fieldName
@@ -79,7 +79,7 @@ public class ReflectHelper {
         }
     }
     /**
-     * 设置obj父类对象fieldName的属性�??
+     * 设置obj父类对象fieldName的属性
      *
      * @param obj
      * @param fieldName
@@ -114,7 +114,7 @@ public class ReflectHelper {
         String firstLetter = fieldName.substring(0, 1).toUpperCase();
         String getter = "get" + firstLetter + fieldName.substring(1);
         Method method = object.getClass().getMethod(getter);
-        // 关闭安全�?查提高效�?
+        // 关闭安全查提高效
         method.setAccessible(true);
         Object value = method.invoke(object);
         method.setAccessible(false);
@@ -127,7 +127,7 @@ public class ReflectHelper {
             String firstLetter = fieldName.substring(0, 1).toUpperCase();
             String getter = "set" + firstLetter + fieldName.substring(1);
             Method method = object.getClass().getMethod(getter, transformObjectParameter(params));
-            // 关闭安全�?查提高效�?
+            // 关闭安全查提高效
             method.setAccessible(true);
             reObj = method.invoke(object, params);
             method.setAccessible(false);

@@ -40,7 +40,7 @@
                             </div>
                             <div class="input-group" id="addMenuDiv" style="display: none">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-success btn-sm" onclick="addProdClass()">
+                                    <button type="button" class="btn btn-success btn-sm" onclick="addMenu()">
                                         <span class="ace-icon fa fa-pencil-square-o icon-on-right bigger-110"></span>
                                         添加菜单
                                     </button>
@@ -72,6 +72,11 @@
 <script src="/resources/assets/js/ace.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        $(document).on('click', 'a[data-url]', function (e) {
+            var dataurl = $(this).attr('data-url');
+            parent.openPage(dataurl);
+            return false;
+        });
         $("#parentName").val("菜单列表");
         initMenuTree();
         THISPAGE.init();
@@ -110,6 +115,13 @@
                 width: 90,
                 align: "center"
             }, {
+                name: "url",
+                label: "URL",
+                index: "url",
+                sortable: true,
+                width: 90,
+                align: "center"
+            }, {
                 name: "oStatus",
                 label: "操作",
                 index: "oStatus",
@@ -128,7 +140,7 @@
             queryConditions.parentId = $("#parentId").val();
             jQuery("#grid-table").jqGrid({
                 url: "/menu/menuList.do",
-                mType: "post",
+                mtype: "post",
                 postData: queryConditions,
                 datatype: 'json',
                 colModel: column,
@@ -137,26 +149,24 @@
                 rowList: [10, 20, 30],
                 pager: "#grid-pager",
                 height: "auto",
-                loadComplete: function (xhr) {
-                    console.log(xhr);
+                loadComplete: function () {
                     var table = this;
                     setTimeout(function () {
                         updatePagerIcons(table);
                         var sb = [];
-                        sb[sb.length] = '<button class="btn btn-xs" title="修改"><i class="ace-icon fa fa-pencil-square-o"></i>修改</button> | &nbsp;&nbsp;';
+                        sb[sb.length] = '<button class="btn btn-xs" title="修改"><i class="ace-icon fa fa-pencil-square-o"></i>修改</button>&nbsp;&nbsp;|&nbsp;&nbsp;';
                         sb[sb.length] = '<button class="btn btn-danger btn-xs" title="删除"><i class="ace-icon fa fa-trash"></i>删除</button> ';
                         $("#grid-pager_left").html(sb.join(''));
                     }, 0);
                     $("#grid-table").jqGrid('setGridWidth', $(".widget-box").width());
                 },
-                loadError: function (data,status,error) {
+                loadError: function (data) {
                     if (data.msg) {
                         layer.alert(data.msg, 2);
                     } else if (data.readyState != 0) {
-                        layer.alert("操作失败了哦，请检查您的网络链接！", 2);
+                        layer.alert("操作失败了哦，请检查您的网络连接！", 2);
                     }
                 }
-
             });
         },
         reloadData: function (t) {
@@ -168,7 +178,7 @@
                 }
                 $("#grid-table").jqGrid("setGridParam", {
                     url: "/menu/menuList.do",
-                    dataType: "json",
+                    datatype: "json",
                     postData: t
                 }).trigger("reloadGrid")
             } catch (e) {
@@ -193,7 +203,7 @@
         }
         $("#parentId").val(data.id);
         $("#parentName").val("父菜单：" + data.name);
-        THISPAGE.init();
+        THISPAGE.reloadData();
     }
 
     function initMenuTree() {
@@ -224,7 +234,6 @@
                 })
             }
         };
-        var remoteDateSource =
         $('#menuTree').aceTree({
             dataSource: remoteDateSource,
             multiSelect: false,
@@ -254,5 +263,9 @@
                 clickMenuResult(result.additionalParameters);
             });
 
+    function addMenu(){
+        //页面层
+        parent.openPage("/menu/addMenu.do");
+    }
 </script>
 </html>
